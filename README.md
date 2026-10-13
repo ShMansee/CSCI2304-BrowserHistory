@@ -8,8 +8,8 @@
 | Name | Student ID | Responsibility |
 |------|------------|----------------|
 | Abilmansur    | <21490> | Node, DoublyLinkedList, DeletedStack, delete_history, console menu |
-| <Natavan> | <22881> | BrowserHistory: visit, back, forward, current_page, display_history, capacity |
-| <Bakhshali> | <17151> | Delete/restore, export/import |
+| Natavan | <22881> | BrowserHistory: visit, back, forward, current_page, display_history, capacity 
+| Bakhshali | <17151> | Delete/restore, export/import |
 
 ## Description
 
