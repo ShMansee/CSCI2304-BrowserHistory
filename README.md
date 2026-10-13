@@ -18,15 +18,18 @@ scratch in Java (no built-in linked list or deque classes). The program runs
 in the console and supports navigation, branching history, a capacity limit,
 delete/restore, and export/import to txt files.
 
-## Project structure
+## File ownership
 
-- `src/` - source code
-  - `Node.java` - one page (URL, metadata, prev, next)
-  - `DoublyLinkedList.java` - our own doubly linked list
-  - `DeletedStack.java` - stack of deleted pages for restore
-  - `BrowserHistory.java` - history manager with the cursor
-  - `Main.java` - console menu
-- `tests/` - test script covering edge cases
+| File | Owner |
+|------|-------|
+| `src/Node.java` | Member 1 |
+| `src/DoublyLinkedList.java` | Member 1 |
+| `src/DeletedStack.java` | Member 1 |
+| `src/Main.java` | Member 1 |
+| `src/BrowserHistory.java` | Member 2 |
+| `src/DeleteRestoreManager.java` | Member 3 |
+| `src/HistoryFileManager.java` | Member 3 |
+| `tests/` | Each member tests their own part |
 
 ## How to compile and run
 
