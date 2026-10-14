@@ -1,4 +1,4 @@
-public class BrowserHistoryTest {
+public class BrowseHistoryTest {
     private static int passed = 0, failed = 0;
     private static void check(String name, Object expected, Object actual) {
         boolean ok = (expected == null) ? actual == null : expected.equals(actual);
