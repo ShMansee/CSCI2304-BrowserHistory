@@ -53,12 +53,70 @@ delete/restore, and export/import to txt files.
 | import <file> | Load history from a txt file |
 | end | Quit |
 
-## Design decisions
+## Agreed design (method contract)
 
-- **Capacity:** <e.g. 50 pages; the oldest page is removed when exceeded>
-- **Metadata:** <timestamp / title / visit number>
-- **Restore:** <where a restored page goes>
-- **Import/export format:** <one URL per line>
+### Member 1: base classes
+
+**Node**: fields `String url`, `String metadata` (timestamp), `Node prev`, `Node next`. Constructor `Node(String url)`.
+
+**DoublyLinkedList** (fields `head`, `tail`, `size`)
+
+| Method | What it does |
+|--------|--------------|
+| `int size()` | number of nodes |
+| `boolean isEmpty()` | true if no nodes |
+| `Node getFirst()` / `Node getLast()` | first or last node, `null` if empty |
+| `void addLast(Node n)` | appends at the end |
+| `void addAfter(Node pred, Node n)` | inserts `n` after `pred` (`pred == null` means at the front) |
+| `void remove(Node n)` | unlinks `n` and reconnects its neighbours |
+| `void removeFirst()` | removes the oldest node (capacity pruning) |
+| `void truncateAfter(Node n)` | removes everything after `n` (`null` removes all) |
+| `Node findByUrl(String url)` | first node with that URL, or `null` |
+| `void clear()` | removes all nodes |
+
+**DeletedStack**: `push(Node n)`, `Node pop()` (`null` if empty), `boolean isEmpty()`, `int size()`, `void clear()`.
+
+### Member 2: BrowserHistory
+
+| Method | What it does |
+|--------|--------------|
+| `BrowserHistory(String homepage, int capacity)` | creates the history with one page, current on it |
+| `void visit(String url)` | cuts everything after current, appends the new node, moves current to it, then removes the oldest if size exceeds capacity |
+| `String back(int steps)` | moves back up to `steps` pages, stops at the oldest, returns the current URL |
+| `String forward(int steps)` | same, but forward |
+| `String currentPage()` | URL plus metadata of the current page, changes nothing |
+| `String displayHistory()` | whole chain, head to tail, `[<]` marks the current page |
+| `void deleteHistory()` | clears the list and the deleted stack, current becomes `null` |
+| `DoublyLinkedList getList()` | gives access to the list |
+| `DeletedStack getDeletedStack()` | gives access to the stack |
+| `Node getCurrent()` / `void setCurrent(Node n)` | read or move the cursor |
+
+### Member 3: features
+
+**DeleteRestoreManager** (constructor takes a `BrowserHistory`)
+
+| Method | What it does |
+|--------|--------------|
+| `boolean deleteUrl(String url)` | finds and removes the page, pushes it on the stack, returns false if not found |
+| `boolean deleteCurrent()` | same, for the active page |
+| `String restore()` | pops the stack and puts the page back, returns its URL, or `null` if the stack is empty |
+
+**HistoryFileManager**
+
+| Method | What it does |
+|--------|--------------|
+| `void exportHistory(BrowserHistory h, String file)` | writes one URL per line, oldest first (throws `IOException`) |
+| `int importHistory(BrowserHistory h, String file)` | calls `deleteHistory()`, then `visit(url)` for each line, returns the number loaded |
+
+### Agreed rules
+1. `back` and `forward` need a positive number; `Main` rejects anything else.
+2. If the history is empty (`current == null`), `back`, `forward` and `currentPage` return `null`, and `Main` prints "No pages."
+3. `visit` must also work when `current` is `null`.
+4. A restored page goes to the end of the list. If the history is already full, the oldest page is pruned.
+5. When the current page is deleted, the cursor moves to the previous page (or the next one if there is none).
+6. Default capacity is 50; a small value (like 3) is used for testing.
+7. Metadata is a timestamp string.
+8. Export format is one URL per line. Import goes through `visit()`, so capacity pruning applies automatically.
 
 ## Git workflow
 
