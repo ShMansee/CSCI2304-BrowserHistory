@@ -7,8 +7,8 @@
 
 | Name | Student ID | Responsibility |
 |------|------------|----------------|
-| Abilmansur    | <21490> | Node, DoublyLinkedList, DeletedStack, delete_history, console menu |
-| Natavan | <22881> | BrowserHistory: visit, back, forward, current_page, display_history, capacity 
+| Abilmansur    | <21490> | Node, DoublyLinkedList, DeletedStack, delete_history |
+| Natavan | <22881> | BrowserHistory: visit, back, forward, current_page, display_history, capacity,console menu | 
 | Bakhshali | <17151> | Delete/restore, export/import |
 
 ## Description
@@ -25,7 +25,7 @@ delete/restore, and export/import to txt files.
 | `src/Node.java` | Member 1 |
 | `src/DoublyLinkedList.java` | Member 1 |
 | `src/DeletedStack.java` | Member 1 |
-| `src/Main.java` | Member 1 |
+| `src/Main.java` | Member 2 |
 | `src/BrowserHistory.java` | Member 2 |
 | `src/DeleteRestoreManager.java` | Member 3 |
 | `src/HistoryFileManager.java` | Member 3 |
