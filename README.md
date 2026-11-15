@@ -1,15 +1,15 @@
 # CSCI 2304 - Browser History Management
 
-**Group:** <number>
+**Group:** 9
 **Course:** CSCI 2304 - Data Structures & Algorithms
 
 ## Team
 
 | Name | Student ID | Responsibility |
 |------|------------|----------------|
-| Abilmansur    | <21490> | Node, DoublyLinkedList, DeletedStack, delete_history |
-| Natavan | <22881> | BrowserHistory: visit, back, forward, current_page, display_history, capacity,console menu | 
-| Bakhshali | <17151> | Delete/restore, export/import |
+| Abilmansur | 21490 | Node, DoublyLinkedList, DeletedStack, delete_history |
+| Natavan | 22881 | BrowserHistory: visit, back, forward, current_page, display_history, capacity, console menu |
+| Bakhshali | 17151 | Delete/restore, export/import |
 
 ## Description
 
@@ -41,17 +41,17 @@ delete/restore, and export/import to txt files.
 
 | Command | Action |
 |---------|--------|
-| visit <url> | Open a new page (clears forward history) |
-| prev [n] | Go back n pages |
-| next [n] | Go forward n pages |
-| current | Show the active page |
-| history | Show all pages, `[<]` marks the active one |
-| delete | Delete a page (can be restored) |
-| restore | Restore the last deleted page |
-| clear | Delete all history |
-| export <file> | Save history to a txt file |
-| import <file> | Load history from a txt file |
-| end | Quit |
+| `visit <url>` | Open a new page (clears forward history) |
+| `prev [n]` | Go back n pages |
+| `next [n]` | Go forward n pages |
+| `current` | Show the active page |
+| `history` | Show all pages, `[<]` marks the active one |
+| `delete [url]` | Delete a page, or the current page if no url is given (can be restored) |
+| `restore` | Restore the last deleted page |
+| `clear` | Delete all history |
+| `export <file>` | Save history to a txt file |
+| `import <file>` | Load history from a txt file |
+| `end` | Quit |
 
 ## Agreed design (method contract)
 
