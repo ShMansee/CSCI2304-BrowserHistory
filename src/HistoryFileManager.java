@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class HistoryFileManager {
-
+    //save the history to a txt file, from oldest(getFirst) to newest
     public void exportHistory(BrowserHistory history, String file) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(
                 Path.of(file), StandardCharsets.UTF_8)) {
@@ -19,7 +19,7 @@ public class HistoryFileManager {
             }
         }
     }
-
+    //load the urls from a text file and applies the history capacity limit(visit)
     public int importHistory(BrowserHistory history, String file) throws IOException {
         //check if the file opens before history clean
         try (BufferedReader reader = Files.newBufferedReader(

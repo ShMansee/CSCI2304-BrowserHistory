@@ -20,6 +20,7 @@ public class DeleteRestoreManager {
 
     private boolean deletePage(Node page) {
         DoublyLinkedList list = history.getList();
+        //move the cursor before removing the current page
         if (page == history.getCurrent()) {
             if (page.prev != null) {
                 history.setCurrent(page.prev);
@@ -27,6 +28,7 @@ public class DeleteRestoreManager {
                 history.setCurrent(page.next);
             }
         }
+        //remove the page + push to stack to restore
         list.remove(page);
         history.getDeletedStack().push(page);
         return true;
@@ -42,7 +44,7 @@ public class DeleteRestoreManager {
         history.setCurrent(list.getLast());
         history.visit(page.url);
 
-        //keep the original node+its timestamp
+        //keep the original node+its timestamp, add it to the end
         Node newPage = history.getCurrent();
         list.remove(newPage);
         list.addLast(page);
